@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gem Game</title>
+    <link rel="stylesheet" href="src/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <nav class="hidden">
+      <div class="nav-content">
+        <h3>Score: <i id="score">0</i></h3>
+        <h3>Time: <i id="time">15</i></h3>
+      </div>
+    </nav>
+
+    <div class="main-menu">
+      <h1>Welcome to Gem Game</h1>
+      <button id="startGameBtn">Start Game</button>
+      <button id="creditsBtn">Credits</button>
+    </div>
+
+    <div id="difficulty-selection" class="hidden">
+      <h2>Select Difficulty</h2>
+      <button id="easyBtn" class="difficulty-btn">Easy</button>
+      <button id="mediumBtn" class="difficulty-btn">Medium</button>
+      <button id="hardBtn" class="difficulty-btn">Hard</button>
+      <button id="backMainMenuBtn" class="back-button">Back</button>
+    </div>
+
+    <div class="credits-page hidden">
+      <h1>Credits</h1>
+      <p>Game Developer: Your Name</p>
+      <p>Graphics: Artist Name</p>
+      <p>Music: Composer Name</p>
+      <button id="backBtn">Back</button>
+    </div>
+
+    <div class="gameplay hidden"></div>
+
+    <div class="game-over hidden">
+      <h1>Game Over</h1>
+      <p>Your final score is <i id="final-score">0</i></p>
+      <button id="restart-button">Restart</button>
+      <button id="back-button">Main Menu</button>
+    </div>
+
+    <script src="src/scripts/scripts.js"></script>
+  </body>
+</html>
