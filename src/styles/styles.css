@@ -219,7 +219,8 @@ nav i {
   margin-bottom: 10px;
 }
 
-.credits-page hr {
+.credits-page hr,
+.how-to-play hr {
   border: 1px solid #00ffff;
   margin: 20px 0;
 }
