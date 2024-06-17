@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const scoreElement = document.getElementById("score");
   const timeElement = document.getElementById("time");
   const gameplayArea = document.querySelector(".gameplay");
+  const gameplayRectArea = document.querySelector(".gameplay-area");
   const gameOverUI = document.querySelector(".game-over");
   const finalScoreElement = document.getElementById("final-score");
   const restartButton = document.getElementById("restart-button");
@@ -39,6 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const easyBtn = document.getElementById("easyBtn");
   const mediumBtn = document.getElementById("mediumBtn");
   const hardBtn = document.getElementById("hardBtn");
+  const howToPlayBtn = document.getElementById("howToPlayBtn");
+  const backToMainMenuFromHowToPlayBtn = document.getElementById(
+    "backToMainMenuFromHowToPlayBtn"
+  );
+  const howToPlayPage = document.querySelector(".how-to-play");
+
+  let gemPositions = []; // Array to keep track of gem positions
 
   function getRandomImage() {
     return images[Math.floor(Math.random() * images.length)];
@@ -49,15 +57,50 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreElement.textContent = score;
   }
 
+  function isOverlapping(newLeft, newTop, width, height) {
+    for (let position of gemPositions) {
+      let {
+        left,
+        top,
+        width: existingWidth,
+        height: existingHeight,
+      } = position;
+      if (
+        newLeft < left + existingWidth &&
+        newLeft + width > left &&
+        newTop < top + existingHeight &&
+        newTop + height > top
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function randomPosition(element) {
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    const maxLeft = windowWidth - element.offsetWidth;
-    const maxTop = windowHeight - element.offsetHeight;
-    const left = Math.floor(Math.random() * maxLeft);
-    const top = Math.floor(Math.random() * maxTop);
+    const area = document.querySelector(".gameplay-area");
+    const areaWidth = area.offsetWidth;
+    const areaHeight = area.offsetHeight;
+    const gemWidth = element.offsetWidth;
+    const gemHeight = element.offsetHeight;
+    const maxLeft = areaWidth - gemWidth;
+    const maxTop = areaHeight - gemHeight;
+    let left, top;
+
+    do {
+      left = Math.floor(Math.random() * maxLeft);
+      top = Math.floor(Math.random() * maxTop);
+    } while (isOverlapping(left, top, gemWidth, gemHeight));
+
     element.style.left = `${left}px`;
     element.style.top = `${top}px`;
+
+    gemPositions.push({
+      left: left,
+      top: top,
+      width: gemWidth,
+      height: gemHeight,
+    });
   }
 
   function displayRandomImage() {
@@ -71,7 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
     img.classList.add("fade-in");
     img.style.position = "absolute";
 
-    randomPosition(img);
+    img.onload = function () {
+      randomPosition(img);
+    };
 
     img.addEventListener("click", function handleClick() {
       const imgName = src.split("/").pop();
@@ -80,7 +125,12 @@ document.addEventListener("DOMContentLoaded", function () {
       img.classList.add("fade-out");
       setTimeout(() => {
         img.remove();
-      }, 300);
+        gemPositions = gemPositions.filter(
+          (pos) =>
+            pos.left !== parseInt(img.style.left) &&
+            pos.top !== parseInt(img.style.top)
+        );
+      }, 100);
 
       img.removeEventListener("click", handleClick);
 
@@ -96,11 +146,16 @@ document.addEventListener("DOMContentLoaded", function () {
           img.classList.add("fade-out");
           setTimeout(() => {
             img.remove();
+            gemPositions = gemPositions.filter(
+              (pos) =>
+                pos.left !== parseInt(img.style.left) &&
+                pos.top !== parseInt(img.style.top)
+            );
             displayRandomImage();
-          }, 300);
+          }, 100);
         }
       },
-      difficulty === "easy" ? 3000 : difficulty === "medium" ? 2000 : 1000
+      difficulty === "easy" ? 2500 : difficulty === "medium" ? 2000 : 1500
     ); // Adjust timing based on difficulty
   }
 
@@ -118,10 +173,12 @@ document.addEventListener("DOMContentLoaded", function () {
     gameOverUI.classList.add("hidden");
     nav.classList.remove("hidden");
     gameplayArea.classList.remove("hidden");
+    gameplayRectArea.classList.remove("hidden");
     mainMenu.classList.add("hidden");
     creditsPage.classList.add("hidden");
     difficultySelection.classList.add("hidden");
     gameplayArea.innerHTML = "";
+    gemPositions = []; // Reset positions
 
     displayInitialGems();
 
@@ -146,10 +203,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showMainMenu() {
     mainMenu.classList.remove("hidden");
+    howToPlayPage.classList.add("hidden");
     creditsPage.classList.add("hidden");
     gameOverUI.classList.add("hidden");
     nav.classList.add("hidden");
-    gameplayArea.classList.add("hidden");
+    gameplayRectArea.classList.add("hidden");
+    difficultySelection.classList.add("hidden");
+  }
+
+  function showHowToPlay() {
+    howToPlayPage.classList.remove("hidden");
+    mainMenu.classList.add("hidden");
+    creditsPage.classList.add("hidden");
+    gameOverUI.classList.add("hidden");
+    nav.classList.add("hidden");
+    gameplayRectArea.classList.add("hidden");
     difficultySelection.classList.add("hidden");
   }
 
@@ -158,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mainMenu.classList.add("hidden");
     gameOverUI.classList.add("hidden");
     nav.classList.add("hidden");
-    gameplayArea.classList.add("hidden");
+    gameplayRectArea.classList.add("hidden");
     difficultySelection.classList.add("hidden");
   }
 
@@ -169,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setDifficulty(level) {
     difficulty = level;
-    maxGems = difficulty === "easy" ? 5 : difficulty === "medium" ? 7 : 10; // Adjust max gems based on difficulty
+    maxGems = difficulty === "easy" ? 5 : difficulty === "medium" ? 5 : 7; // Adjust max gems based on difficulty
     startGameLogic();
   }
 
@@ -182,6 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
   easyBtn.addEventListener("click", () => setDifficulty("easy"));
   mediumBtn.addEventListener("click", () => setDifficulty("medium"));
   hardBtn.addEventListener("click", () => setDifficulty("hard"));
+  howToPlayBtn.addEventListener("click", showHowToPlay);
+  backToMainMenuFromHowToPlayBtn.addEventListener("click", showMainMenu);
 
   showMainMenu();
 });

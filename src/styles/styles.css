@@ -55,9 +55,84 @@ nav i {
   text-shadow: 0 0 10px #ff33cc, 0 0 20px #ff33cc, 0 0 30px #ff33cc;
 }
 
+/* How to Play Page */
+.how-to-play {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.how-to-play h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 35px #00ffff;
+}
+
+.how-to-play ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.2em;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.how-to-play ul ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.how-to-play button {
+  display: block;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  color: #000;
+  background: linear-gradient(45deg, #00ffff, #00e0ff);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px auto 0 auto;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-to-play button:hover {
+  background: linear-gradient(45deg, #00e0ff, #00ffff);
+  box-shadow: 0 0 35px rgba(0, 255, 255, 1), 0 0 45px rgba(0, 224, 255, 0.7);
+  transform: scale(1.1);
+}
+
+.how-to-play button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.how-to-play button:hover::before {
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+}
+
 /* Main Menu and Credits Page */
 .main-menu,
-.credits-page {
+.credits-page,
+.how-to-play {
   text-align: center;
   animation: fadeIn 2s ease-in-out;
 }
@@ -84,6 +159,7 @@ nav i {
   letter-spacing: 2px;
   position: relative;
   overflow: hidden;
+  margin-bottom: 25px;
 }
 
 .main-menu button:hover,
@@ -114,13 +190,57 @@ nav i {
   height: 220%;
 }
 
+/* Credits page specific styles */
+.credits-page {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.credits-page h1 {
+  margin-bottom: 20px;
+}
+
+.credits-page h2 {
+  margin: 15px 0;
+}
+
+.credits-page ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.credits-page li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.credits-page hr {
+  border: 1px solid #00ffff;
+  margin: 20px 0;
+}
+
+.credits-page p {
+  font-size: 1.2em;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+.credits-content {
+  text-align: center;
+}
+
 /* Difficulty Selection */
-#difficulty-selection {
+.difficulty-selection {
   text-align: center;
   animation: fadeIn 2s ease-in-out;
 }
 
-#difficulty-selection h2 {
+.difficulty-selection h2 {
   font-size: 2.5em;
   margin-bottom: 20px;
   text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 35px #00ffff;
@@ -281,13 +401,25 @@ nav i {
 }
 
 /* Gameplay area */
+
+/* Gameplay area wrapper */
+.gameplay-area {
+  position: relative;
+  width: 99%;
+  height: 95vh;
+  margin: 0 auto;
+  overflow: hidden;
+  /* border: 2px solid #00ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; */
+}
+
+/* Gameplay area */
 .gameplay {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
 }
-
 /* Adjust image size for different screen sizes */
 .gameplay img {
   width: 200px;
@@ -314,6 +446,16 @@ nav i {
     font-size: 1em;
   }
 
+  .main-menu h1,
+  .credits-page h1 {
+    font-size: 2.1em;
+  }
+
+  .main-menu button,
+  .credits-page button {
+    font-size: 0.7em;
+  }
+
   .game-over {
     width: 90%;
   }
@@ -321,6 +463,57 @@ nav i {
   .gameplay img {
     width: 160px;
     height: 160px;
+  }
+
+  .difficulty-selection h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .difficulty-btn {
+    font-size: 1em;
+  }
+
+  .back-button {
+    font-size: 1em;
+  }
+
+  .gameplay-area {
+    width: 99%;
+    height: 85vh;
+  }
+
+  .credits-page {
+    max-width: 430px;
+  }
+
+  .credits-page h2 {
+    font-size: 1.8em;
+  }
+
+  .credits-page ul {
+    padding-left: 20px;
+  }
+
+  .credits-page li {
+    font-size: 1.1em;
+  }
+
+  .credits-page p {
+    font-size: 1.1em;
+  }
+
+  .how-to-play {
+    padding: 15px;
+    max-width: 420px;
+  }
+
+  .how-to-play h1 {
+    font-size: 2em;
+  }
+
+  .how-to-play ul {
+    font-size: 1em;
   }
 }
 
@@ -346,15 +539,40 @@ nav i {
     width: 140px;
     height: 140px;
   }
+
+  .credits-page h1 {
+    font-size: 1.8em;
+  }
+
+  .credits-page h2 {
+    font-size: 1.6em;
+  }
+
+  .credits-page ul {
+    padding-left: 15px;
+  }
+
+  .credits-page li {
+    font-size: 1em;
+  }
+
+  .credits-page p {
+    font-size: 1em;
+  }
+
+  .main-menu button,
+  .credits-page button {
+    font-size: 0.7em;
+  }
 }
 
 /* Animations */
 .fade-in {
-  animation: fadeIn 0.6s forwards;
+  animation: fadeIn 0.4s forwards;
 }
 
 .fade-out {
-  animation: fadeOut 0.3s forwards;
+  animation: fadeOut 0.2s forwards;
 }
 
 @keyframes fadeIn {

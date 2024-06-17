@@ -21,10 +21,39 @@
     <div class="main-menu">
       <h1>Welcome to Gem Game</h1>
       <button id="startGameBtn">Start Game</button>
+      <button id="howToPlayBtn">How to play?</button>
       <button id="creditsBtn">Credits</button>
     </div>
 
-    <div id="difficulty-selection" class="hidden">
+    <div class="how-to-play hidden">
+      <div class="how-to-play-content">
+        <h1>How to Play</h1>
+        <hr />
+        <p>
+          Welcome to the Gem Game! Your goal is to collect as many gems as
+          possible within the given time limit. Here are the rules:
+        </p>
+        <ul>
+          <li>Click on the gems that appear on the screen to collect them.</li>
+          <li>Each gem has a different point value:</li>
+          <ul>
+            <li>Amber: 10 points</li>
+            <li>Amethyst: 50 points</li>
+            <li>Diamond: 20 points</li>
+            <li>Emerald: 25 points</li>
+            <li>Sapphire: 30 points</li>
+            <li>Stone: -30 points</li>
+          </ul>
+          <li>Avoid clicking on stones as they will reduce your score.</li>
+          <li>The game ends when the time runs out.</li>
+        </ul>
+        <button id="backToMainMenuFromHowToPlayBtn" class="back-button">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <div id="difficulty-selection" class="difficulty-selection hidden">
       <h2>Select Difficulty</h2>
       <button id="easyBtn" class="difficulty-btn">Easy</button>
       <button id="mediumBtn" class="difficulty-btn">Medium</button>
@@ -33,17 +62,40 @@
     </div>
 
     <div class="credits-page hidden">
-      <h1>Credits</h1>
-      <p>Game Developer: Muhammad Rafi Rabani</p>
-      <p>Graphics: Artist Name</p>
-      <p>Music: Composer Name</p>
-      <button id="backBtn">Back</button>
+      <div class="credits-content">
+        <h1>Credits</h1>
+        <hr />
+        <div class="credit-section">
+          <h2>Development Team</h2>
+          <ul>
+            <li>Muhammad Rafi Rabani - Lead Developer</li>
+            <li>ChatGPT - Game Designer</li>
+            <li>HISS TKJ - QA Tester</li>
+          </ul>
+        </div>
+        <hr />
+        <div class="credit-section">
+          <h2>Special Thanks</h2>
+          <ul>
+            <li>HISS TKJ</li>
+            <li>ChatGPT</li>
+          </ul>
+        </div>
+        <hr />
+        <div class="credit-section">
+          <h2>Support</h2>
+          <p>Thank you to all our supporters and beta testers!</p>
+        </div>
+        <button id="backBtn">Back</button>
+      </div>
     </div>
 
-    <div class="gameplay hidden"></div>
+    <div class="gameplay-area hidden">
+      <div class="gameplay hidden"></div>
+    </div>
 
     <div class="game-over hidden">
-      <h1>Game Over</h1>
+      <h1>Time out!</h1>
       <p>Your final score is <i id="final-score">0</i></p>
       <button id="restart-button">Restart</button>
       <button id="back-button">Main Menu</button>
