@@ -12,9 +12,10 @@
 }
 
 body {
+  background: linear-gradient(to right, #000428, #004e92);
   background: url(../assets/images/background.jpg) no-repeat center center fixed;
   background-size: cover;
-  color: #f8f8f8;
+  color: #e0e0e0;
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -25,10 +26,10 @@ body {
 
 /* Navigation */
 nav {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   color: #00ffff;
   padding: 10px 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 10px;
   left: 50%;
@@ -57,19 +58,20 @@ nav i {
 
 /* How to Play Page */
 .how-to-play {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
+  transition: all 0.5s ease;
 }
 
 .how-to-play h1 {
-  font-size: 4em;
+  font-size: 3em;
   margin-bottom: 20px;
-  text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 35px #00ffff;
+  text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
 }
 
 .how-to-play ul {
@@ -192,10 +194,10 @@ nav i {
 
 /* Credits page specific styles */
 .credits-page {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
   max-width: 800px;
   margin: 20px auto;
 }

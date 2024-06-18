@@ -45,6 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
     "backToMainMenuFromHowToPlayBtn"
   );
   const howToPlayPage = document.querySelector(".how-to-play");
+  const clickSound = document.getElementById("clickSound");
+  const selectSound = document.getElementById("selectSound");
+  const collectSound = document.getElementById("collectSound");
+  const endSound = document.getElementById("endSound");
+  const backgroundMusic = document.getElementById("backgroundMusic");
 
   let gemPositions = []; // Array to keep track of gem positions
 
@@ -114,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
     img.classList.add("fade-in");
     img.style.position = "absolute";
 
+    img.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
+
     img.onload = function () {
       randomPosition(img);
     };
@@ -123,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateScore(imageScores[imgName]);
       img.classList.remove("fade-in");
       img.classList.add("fade-out");
+      collectSoundSys();
       setTimeout(() => {
         img.remove();
         gemPositions = gemPositions.filter(
@@ -182,13 +192,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     displayInitialGems();
 
+    startBackgroundMusic();
+
     const timerInterval = setInterval(() => {
       if (timeLeft > 0) {
         timeLeft--;
         timeElement.textContent = timeLeft;
       } else {
         clearInterval(timerInterval);
+        stopBackgroundMusic();
         showGameOverUI();
+        endSoundSys();
       }
     }, 1000);
   }
@@ -241,17 +255,79 @@ document.addEventListener("DOMContentLoaded", function () {
     startGameLogic();
   }
 
-  startGameBtn.addEventListener("click", showDifficultySelection);
-  creditsBtn.addEventListener("click", showCreditsPage);
-  backBtn.addEventListener("click", showMainMenu);
-  backButton.addEventListener("click", showMainMenu);
-  backMainMenuButton.addEventListener("click", showMainMenu);
-  restartButton.addEventListener("click", startGameLogic);
-  easyBtn.addEventListener("click", () => setDifficulty("easy"));
-  mediumBtn.addEventListener("click", () => setDifficulty("medium"));
-  hardBtn.addEventListener("click", () => setDifficulty("hard"));
-  howToPlayBtn.addEventListener("click", showHowToPlay);
-  backToMainMenuFromHowToPlayBtn.addEventListener("click", showMainMenu);
+  function clickSoundSys() {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  }
+
+  function selectSoundSys() {
+    selectSound.currentTime = 0;
+    selectSound.play();
+  }
+
+  function collectSoundSys() {
+    collectSound.currentTime = 0;
+    collectSound.play();
+  }
+
+  function endSoundSys() {
+    endSound.currentTime = 0;
+    endSound.play();
+  }
+
+  function startBackgroundMusic() {
+    backgroundMusic.currentTime = 0;
+    backgroundMusic.play();
+  }
+
+  function stopBackgroundMusic() {
+    backgroundMusic.pause();
+  }
+
+  startGameBtn.addEventListener("click", () => {
+    showDifficultySelection();
+    clickSoundSys();
+  });
+  creditsBtn.addEventListener("click", () => {
+    showCreditsPage();
+    clickSoundSys();
+  });
+  backBtn.addEventListener("click", () => {
+    showMainMenu();
+    clickSoundSys();
+  });
+  backButton.addEventListener("click", () => {
+    showMainMenu();
+    clickSoundSys();
+  });
+  backMainMenuButton.addEventListener("click", () => {
+    showMainMenu();
+    clickSoundSys();
+  });
+  restartButton.addEventListener("click", () => {
+    startGameLogic();
+    clickSoundSys();
+  });
+  easyBtn.addEventListener("click", () => {
+    setDifficulty("easy");
+    selectSoundSys();
+  });
+  mediumBtn.addEventListener("click", () => {
+    setDifficulty("medium");
+    selectSoundSys();
+  });
+  hardBtn.addEventListener("click", () => {
+    setDifficulty("hard");
+    selectSoundSys();
+  });
+  howToPlayBtn.addEventListener("click", () => {
+    showHowToPlay();
+    clickSoundSys();
+  });
+  backToMainMenuFromHowToPlayBtn.addEventListener("click", () => {
+    showMainMenu();
+    clickSoundSys();
+  });
 
   showMainMenu();
 });
